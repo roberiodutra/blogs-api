@@ -1,6 +1,6 @@
 const { httpStatus, errorMessages } = require('../helpers/index');
 
-const loginValidation = (email, password, res, userExists) => {
+const loginValidation = (email, password, userExists, res) => {
   switch (true) {
     case !email || !password:
       return res.status(httpStatus.BAD_REQUEST).json(errorMessages.FIELDS_REQ);

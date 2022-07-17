@@ -11,4 +11,4 @@ const jwtConfig = {
 const generateToken = (payload) =>
   jwt.sign(payload, SECRET, jwtConfig);
 
-module.exports = { generateToken };
+module.exports = generateToken;
