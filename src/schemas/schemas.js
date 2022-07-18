@@ -1,19 +1,17 @@
 const Joi = require('joi');
-const { errorMessages } = require('../helpers/index');
+const { errorMessages: err } = require('../helpers/');
 
 module.exports = {
-  schemas: Joi.object({
+  loginVal: Joi.object({
   email: Joi.string()
-    .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
     .required()
     .messages({
-      'string.empty': errorMessages.FIELDS_REQ,
-      'string.email': 'Invalid email format',
+      'string.empty': err.FIELDS_REQ,
     }),
   password: Joi.string()
     .required()
     .messages({
-      'string.empty': errorMessages.FIELDS_REQ,
+      'string.empty': err.FIELDS_REQ,
     }),
   }),
 };
