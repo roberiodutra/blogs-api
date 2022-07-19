@@ -4,4 +4,4 @@ const create = async (body) => {
   await User.create(body);
 };
 
-module.exports = create;
+module.exports = { create };
