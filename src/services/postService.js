@@ -1,4 +1,4 @@
-const { BlogPost, PostCategory, Category } = require('../database/models');
+const { BlogPost, PostCategory, Category, User } = require('../database/models');
 const { errorMessages: err } = require('../helpers');
 const { postVal } = require('../schemas');
 
@@ -29,7 +29,21 @@ const add = async (req) => {
 };
 
 const getAll = async () => {
-  const data = await BlogPost.findAll();
+  const data = await BlogPost.findAll({
+    include: [
+      {
+        model: User,
+        as: 'user',
+        attributes: { exclude: 'password' },
+      },
+      {
+        model: Category,
+        as: 'categories',
+        attributes: ['id', 'name'],
+      }],
+  });
+
+  console.log(['TEST', data]);
   return data;
 };
 
