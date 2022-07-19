@@ -3,12 +3,12 @@ const { generateToken } = require('../helpers/index');
 const { loginVal } = require('../schemas/schemas');
 const { errorMessages: err } = require('../helpers/');
 
-const login = async ({ email, password }) => {
-  await loginVal.validateAsync({ email, password });
+const login = async (body) => {
+  await loginVal.validateAsync(body);
 
   const userExists = await User.findOne({
     attributes: ['id', 'displayName', 'email', 'image'],
-    where: { email, password },
+    where: body,
   });
 
   if (!userExists) throw new Error(err.INVALID_FIELDS);
