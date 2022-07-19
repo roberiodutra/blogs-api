@@ -7,7 +7,6 @@ const create = async (body) => {
   const { email } = body;
 
   const userExists = await User.findOne({
-    attributes: ['id', 'displayName', 'email', 'image'],
     where: { email },
   });
 
