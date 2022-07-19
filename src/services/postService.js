@@ -1,6 +1,6 @@
 const { BlogPost, PostCategory, Category } = require('../database/models');
 const { errorMessages: err } = require('../helpers');
-const { postVal } = require('../schemas/schemas');
+const { postVal } = require('../schemas');
 
 const add = async (req) => {
   await postVal.validateAsync(req.body);

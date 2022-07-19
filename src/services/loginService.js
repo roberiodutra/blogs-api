@@ -1,6 +1,6 @@
 const { User } = require('../database/models');
 const { generateToken, errorMessages: err } = require('../helpers');
-const { loginVal } = require('../schemas/schemas');
+const { loginVal } = require('../schemas');
 
 const login = async (body) => {
   await loginVal.validateAsync(body);

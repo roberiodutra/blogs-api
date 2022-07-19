@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { tokenVal } = require('../schemas/schemas');
+const { tokenVal } = require('../schemas');
 const { errorMessages: err } = require('../helpers');
 
 const SECRET = process.env.JWT_SECRET;
