@@ -15,5 +15,6 @@ app.use(morgan('common'));
 app.use(express.json());
 app.use('/login', rescue(loginRouter));
 app.use('/user', rescue(userRouter));
+app.use('/categories', rescue(categoryRouter));
 
 module.exports = app;
