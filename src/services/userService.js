@@ -34,6 +34,6 @@ const getById = async (id) => {
   if (!user) throw new Error(err.USER_N_FOUND);
 
   return user;
-}
+};
 
 module.exports = { create, getAll, getById };
