@@ -28,5 +28,11 @@ module.exports = {
       .messages({
         'string.email': err.INVALID_EMAIL,
       }),
+    password: Joi.string()
+      .required()
+      .min(6)
+      .messages({
+        'string.min': err.INVALID_PASS,
+      }),
   }),
 };
