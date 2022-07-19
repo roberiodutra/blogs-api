@@ -6,6 +6,8 @@ const errorMessages = {
   INVALID_EMAIL: '"email" must be a valid email | status 400',
   INVALID_PASS: '"password" length must be at least 6 characters long | status 400',
   USER_A_REG: 'User already registered | status 409',
+  TOKEN_N_FOUND: 'Token not found | status 401',
+  INVALID_TOKEN: 'Expired or invalid token | status 401',
 };
 
 module.exports = errorMessages;
