@@ -24,7 +24,10 @@ module.exports = {
       }),
     email: Joi.string()
       .required()
-      .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
+      .email({
+        minDomainSegments: 2,
+        tlds: { allow: ['com', 'net'] },
+      })
       .messages({
         'string.email': err.INVALID_EMAIL,
       }),
@@ -38,6 +41,14 @@ module.exports = {
       .required()
       .messages({
         'any.required': err.FIELDS_REQ,
+      }),
+  }),
+
+  tokenVal: Joi.object({
+    token: Joi.string()
+      .required()
+      .messages({
+        'string.empty': err.TOKEN_N_FOUND,
       }),
   }),
 };

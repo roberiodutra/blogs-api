@@ -1,6 +1,5 @@
 const { User } = require('../database/models');
-const { generateToken } = require('../helpers');
-const { errorMessages: err } = require('../helpers');
+const { generateToken, errorMessages: err } = require('../helpers');
 const { userVal } = require('../schemas/schemas');
 
 const create = async (body) => {
@@ -21,9 +20,11 @@ const create = async (body) => {
 };
 
 const getAll = async () => {
-  await User.findAll({
+  const data = await User.findAll({
     attributes: { exclude: 'password' },
   });
+
+  return data;
 }
 
 module.exports = { create, getAll };

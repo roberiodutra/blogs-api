@@ -1,5 +1,6 @@
 const { httpStatus } = require('../helpers');
 const userService = require('../services/userService');
+const validateTokenService = require('../services/validateTokenService');
 
 const create = async (req, res) => {
   try {
@@ -11,13 +12,17 @@ const create = async (req, res) => {
   }
 };
 
-const getAll = async (_req, res) => {
+const getAll = async (req, res) => {
   try {
+    await validateTokenService.validate(req);
+
     const data = await userService.getAll();
+
     return res.status(httpStatus.OK).json(data);
   } catch (e) {
-    console.error(e);
+    res.status(e.message.slice(-3))
+      .json({ message: e.message.slice(0, -13) });
   }
 };
 
-module.exports = { create };
+module.exports = { create, getAll };
