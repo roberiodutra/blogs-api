@@ -51,4 +51,23 @@ module.exports = {
         'string.empty': err.TOKEN_N_FOUND,
       }),
   }),
+
+  postVal: Joi.object({
+    title: Joi.string()
+      .required()
+      .messages({
+        'string.empty': err.FIELDS_REQ,
+      }),
+    content: Joi.string()
+      .required()
+      .messages({
+        'string.empty': err.FIELDS_REQ,
+      }),
+    categoryIds: Joi.array()
+      .items(Joi.number()
+        .required()
+        .messages({
+          'any.required': err.FIELDS_REQ,
+        })),
+  }),
 };
