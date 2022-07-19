@@ -5,9 +5,11 @@ const bodyParser = require('body-parser');
 const rescue = require('express-rescue');
 const helmet = require('helmet');
 const morgan = require('morgan');
-const loginRouter = require('./routers/loginRouter');
-const userRouter = require('./routers/userRouter');
-const categoryRouter = require('./routers/categoryRouter');
+const {
+  loginRouter,
+  userRouter,
+  categoryRouter,
+} = require('./routers');
 
 app.use(bodyParser.json());
 app.use(helmet());
