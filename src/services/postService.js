@@ -43,7 +43,6 @@ const getAll = async () => {
       }],
   });
 
-  console.log(['TEST', data]);
   return data;
 };
 
