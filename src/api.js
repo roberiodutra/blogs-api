@@ -7,6 +7,7 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const loginRouter = require('./routers/loginRouter');
 const userRouter = require('./routers/userRouter');
+const categoryRouter = require('./routers/categoryRouter');
 
 app.use(bodyParser.json());
 app.use(helmet());

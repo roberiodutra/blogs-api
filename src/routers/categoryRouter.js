@@ -4,6 +4,6 @@ const categoryController = require('../controllers/loginController');
 
 const categoryRouter = express.Router();
 
-categoryRouter.post('/', categoryController);
+categoryRouter.post('/', categoryController.add);
 
 module.exports = categoryRouter;
