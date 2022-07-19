@@ -8,6 +8,7 @@ const errorMessages = {
   USER_A_REG: 'User already registered | status 409',
   TOKEN_N_FOUND: 'Token not found | status 401',
   INVALID_TOKEN: 'Expired or invalid token | status 401',
+  USER_N_FOUND: 'User does not exist | status 404',
 };
 
 module.exports = errorMessages;
