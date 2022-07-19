@@ -22,5 +22,11 @@ module.exports = {
       .messages({
         'string.min': err.INVALID_NAME,
       }),
+    email: Joi.string()
+      .required()
+      .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
+      .messages({
+        'string.email': err.INVALID_EMAIL,
+      }),
   }),
 };
