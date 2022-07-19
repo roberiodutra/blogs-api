@@ -50,7 +50,7 @@ describe(requirements[7].description, () => {
       });
   });
 
-  it.only('Será validado que não é possivel cadastrar uma categoria sem o campo name', async () => {
+  it('Será validado que não é possivel cadastrar uma categoria sem o campo name', async () => {
     let token;
     await frisby
       .post(`${url}/login`,
