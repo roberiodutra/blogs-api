@@ -5,7 +5,7 @@ const errorMessages = {
   INVALID_NAME: '"displayName" length must be at least 8 characters long | status 400',
   INVALID_EMAIL: '"email" must be a valid email | status 400',
   INVALID_PASS: '"password" length must be at least 6 characters long | status 400',
-  USER_A_REG: 'User already registered',
+  USER_A_REG: 'User already registered | status 409',
 };
 
 module.exports = errorMessages;

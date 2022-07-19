@@ -92,7 +92,7 @@ describe(requirements[3].description, () => {
       });
   });
 
-  it('Será validado que não é possível cadastrar com um email já existente', async () => {
+  it.only('Será validado que não é possível cadastrar com um email já existente', async () => {
     await frisby
       .post(`${url}/user`,
         {
