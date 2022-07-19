@@ -1,5 +1,5 @@
 const { httpStatus } = require('../helpers');
-const userService = require('../services/userService');
+const categoryService = require('../services/categoryService');
 const validateTokenService = require('../services/validateTokenService');
 
 const add = async (req, res) => {

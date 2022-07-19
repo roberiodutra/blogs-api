@@ -51,12 +51,4 @@ module.exports = {
         'string.empty': err.TOKEN_N_FOUND,
       }),
   }),
-
-  categoryVal: Joi.object({
-    name: Joi.string()
-      .required()
-      .messages({
-        'string.empty': err.TOKEN_N_FOUND,
-      }),
-  }),
 };
