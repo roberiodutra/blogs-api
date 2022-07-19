@@ -30,6 +30,9 @@ const getById = async (id) => {
   const user = await User.findByPk(id, {
     attributes: { exclude: 'password' },
   });
+
+  if (!user) throw new Error(err.USER_N_FOUND);
+
   return user;
 }
 
