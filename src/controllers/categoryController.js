@@ -14,4 +14,16 @@ const add = async (req, res) => {
   }
 };
 
-module.exports = { add };
+const getAll = async (req, res) => {
+  try {
+    await validateTokenService.validate(req);
+
+    const data = await categoryService.getAll();
+    return res.status(httpStatus.OK).json(data);
+  } catch (e) {
+    res.status(e.message.slice(-3))
+      .json({ message: e.message.slice(0, -13) });
+  }
+};
+
+module.exports = { add, getAll };

@@ -17,7 +17,6 @@ const getAll = async (req, res) => {
     await validateTokenService.validate(req);
 
     const data = await userService.getAll();
-
     return res.status(httpStatus.OK).json(data);
   } catch (e) {
     res.status(e.message.slice(-3))
