@@ -9,4 +9,9 @@ const add = async ({ name }) => {
   return dataValues;
 };
 
-module.exports = { add };
+const getAll = async () => {
+  const data = await Category.findAll();
+  return data;
+};
+
+module.exports = { add, getAll };
