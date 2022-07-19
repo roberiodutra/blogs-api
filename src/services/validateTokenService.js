@@ -8,8 +8,12 @@ const validate = async (req) => {
   const token = req.headers.authorization;
   
   await tokenVal.validateAsync({ token });
-  jwt.verify(token, SECRET, (error) => {
-    if (error) throw new Error(err.INVALID_TOKEN);
+  jwt.verify(token, SECRET, (error, user) => {
+    if (error) {
+      throw new Error(err.INVALID_TOKEN);
+    } else {
+      req.user = user;
+    }
   });
 };
 
