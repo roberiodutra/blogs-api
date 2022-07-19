@@ -20,4 +20,10 @@ const create = async (body) => {
   return { token };
 };
 
-module.exports = { create };
+const getAll = async () => {
+  await User.findAll({
+    attributes: { exclude: 'password' },
+  });
+}
+
+module.exports = { create, getAll };
