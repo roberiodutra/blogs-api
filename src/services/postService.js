@@ -46,4 +46,9 @@ const getAll = async () => {
   return data;
 };
 
-module.exports = { add, getAll };
+const getById = async (id) => {
+  const post = await BlogPost.findByPk(id);
+  return post;
+};
+
+module.exports = { add, getAll, getById };
