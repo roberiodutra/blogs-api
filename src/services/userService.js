@@ -1,5 +1,5 @@
-const { User } = require('../database/models/');
-const { generateToken } = require('../helpers/');
+const { User } = require('../database/models');
+const { generateToken } = require('../helpers');
 const { errorMessages: err } = require('../helpers');
 const { userVal } = require('../schemas/schemas');
 

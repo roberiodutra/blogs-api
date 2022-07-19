@@ -1,5 +1,5 @@
 const Joi = require('joi');
-const { errorMessages: err } = require('../helpers/');
+const { errorMessages: err } = require('../helpers');
 
 module.exports = {
   loginVal: Joi.object({

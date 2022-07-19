@@ -1,5 +1,5 @@
 const loginService = require('../services/loginService');
-const { httpStatus } = require('../helpers/');
+const { httpStatus } = require('../helpers');
 
 const loginController = async (req, res) => {
   try {
@@ -7,7 +7,7 @@ const loginController = async (req, res) => {
     return res.status(httpStatus.OK).json(token);
   } catch (e) {
     res.status(e.message.slice(-3))
-      .json({message: e.message.slice(0, -13)});
+      .json({ message: e.message.slice(0, -13) });
   }
 };
 

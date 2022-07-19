@@ -6,9 +6,8 @@ const create = async (req, res) => {
     const token = await userService.create(req.body);
     return res.status(httpStatus.CREATED).json(token);
   } catch (e) {
-    console.log(['TEST', e])
     res.status(e.message.slice(-3))
-      .json({message: e.message.slice(0, -13)});
+      .json({ message: e.message.slice(0, -13) });
   }
 };
 
