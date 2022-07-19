@@ -34,5 +34,10 @@ module.exports = {
       .messages({
         'string.min': err.INVALID_PASS,
       }),
+    image: Joi.string()
+      .required()
+      .messages({
+        'any.required': err.FIELDS_REQ,
+      }),
   }),
 };

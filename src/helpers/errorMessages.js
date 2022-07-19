@@ -1,5 +1,5 @@
 const errorMessages = {
-  INTERNAL_ERROR: 'Error when trying to perform operation',
+  INTERNAL_ERROR: 'Error when trying to perform operation | status 400',
   FIELDS_REQ: 'Some required fields are missing | status 400',
   INVALID_FIELDS: 'Invalid fields | status 400',
   INVALID_NAME: '"displayName" length must be at least 8 characters long | status 400',
