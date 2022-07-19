@@ -1,0 +1,13 @@
+const { Category } = require('../database/models');
+const { errorMessages: err } = require('../helpers');
+
+const add = async (body) => {
+  await categoryVal.validateAsync(body);
+  const { name } = body;
+
+  const createCat = await Category.create({ name });
+
+  return { createCat };
+};
+
+module.exports = { add };
