@@ -9,6 +9,7 @@ const errorMessages = {
   TOKEN_N_FOUND: 'Token not found | status 401',
   INVALID_TOKEN: 'Expired or invalid token | status 401',
   USER_N_FOUND: 'User does not exist | status 404',
+  NAME_REQUIRED: '"name" is required | status 400',
 };
 
 module.exports = errorMessages;
