@@ -3,8 +3,8 @@ const userService = require('../services/userService');
 
 const create = async (req, res) => {
   try {
-    await userService.create(req.body);
-    return res.status(httpStatus.CREATED).json();
+    const token = await userService.create(req.body);
+    return res.status(httpStatus.CREATED).json(token);
   } catch (e) {
     console.log(['TEST', e])
     res.status(e.message.slice(-3))
