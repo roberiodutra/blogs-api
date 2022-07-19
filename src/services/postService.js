@@ -28,4 +28,9 @@ const add = async (req) => {
   return dataValues;
 };
 
-module.exports = { add };
+const getAll = async () => {
+  const data = await BlogPost.findAll();
+  return data;
+};
+
+module.exports = { add, getAll };
