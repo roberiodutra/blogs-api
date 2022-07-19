@@ -25,4 +25,18 @@ const getAll = async (req, res) => {
   }
 };
 
-module.exports = { create, getAll };
+const getById = async (req, res) => {
+  try {
+    await validateTokenService.validate(req);
+
+    const { id } = req.params;
+    const data = await userService.getById(id);
+
+    return res.status(httpStatus.OK).json(data);
+  } catch (e) {
+    res.status(e.message.slice(-3))
+      .json({ message: e.message.slice(0, -13) });
+  }
+};
+
+module.exports = { create, getAll, getById };
