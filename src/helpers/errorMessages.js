@@ -11,6 +11,7 @@ const errorMessages = {
   USER_N_FOUND: 'User does not exist | status 404',
   NAME_REQUIRED: '"name" is required | status 400',
   CAT_N_FOUND: '"categoryIds" not found | status 400',
+  POST_N_FOUND: 'Post does not exist | status 404',
   UNAUTHORIZED: 'Unauthorized user | status 401',
 };
 

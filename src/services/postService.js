@@ -47,7 +47,26 @@ const getAll = async () => {
 };
 
 const getById = async (id) => {
-  const post = await BlogPost.findByPk(id);
+  const postExists = await BlogPost.findAll({
+    where: { id },
+  });
+
+  if (postExists.length === 0) throw new Error(err.POST_N_FOUND);
+
+  const post = await BlogPost.findByPk(id, {
+    include: [
+      {
+        model: User,
+        as: 'user',
+        attributes: { exclude: 'password' },
+      },
+      {
+        model: Category,
+        as: 'categories',
+        attributes: ['id', 'name'],
+      }],
+  });
+
   return post;
 };
 
