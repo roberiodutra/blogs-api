@@ -55,4 +55,17 @@ const update = async (req, res) => {
   }
 };
 
-module.exports = { add, getAll, getById, update };
+const remove = async (req, res) => {
+  try {
+    await validateTokenService.validate(req);
+
+    await postService.remove(req);
+
+    return res.status(httpStatus.NO_CONTENT).end();
+  } catch (e) {
+    res.status(e.message.slice(-3))
+      .json({ message: e.message.slice(0, -13) });
+  }
+};
+
+module.exports = { add, getAll, getById, update, remove };
