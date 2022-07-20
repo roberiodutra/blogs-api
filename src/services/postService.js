@@ -70,4 +70,25 @@ const getById = async (id) => {
   return post;
 };
 
-module.exports = { add, getAll, getById };
+const update = async (req) => {
+  const { id: postId } = req.params;
+
+  const checkUser = await BlogPost.findAll({
+    where: {
+      id: postId,
+      userId: req.user.id,
+    },
+  });
+
+  if (checkUser.length === 0) throw new Error(err.UNAUTHORIZED);
+
+  await BlogPost.update(req.body,
+    { where: { id: postId },
+  });
+
+  const data = await getById(postId);
+
+  return data.dataValues;
+};
+
+module.exports = { add, getAll, getById, update };

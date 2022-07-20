@@ -40,4 +40,17 @@ const getById = async (req, res) => {
   }
 };
 
-module.exports = { add, getAll, getById };
+const update = async (req, res) => {
+  try {
+    await validateTokenService.validate(req);
+
+    const data = await postService.update(req);
+
+    return res.status(httpStatus.OK).json(data);
+  } catch (e) {
+    res.status(e.message.slice(-3))
+      .json({ message: e.message.slice(0, -13) });
+  }
+};
+
+module.exports = { add, getAll, getById, update };
