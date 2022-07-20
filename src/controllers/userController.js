@@ -38,4 +38,17 @@ const getById = async (req, res) => {
   }
 };
 
-module.exports = { create, getAll, getById };
+const remove = async (req, res) => {
+  try {
+    await validateTokenService.validate(req);
+
+    await userService.remove(req);
+
+    return res.status(httpStatus.NO_CONTENT).end();
+  } catch (e) {
+    res.status(e.message.slice(-3))
+      .json({ message: e.message.slice(0, -13) });
+  }
+};
+
+module.exports = { create, getAll, getById, remove };
