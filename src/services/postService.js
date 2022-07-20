@@ -110,4 +110,8 @@ const remove = async (req) => {
   await BlogPost.destroy({ where: { id: postId } });
 };
 
-module.exports = { add, getAll, getById, update, remove };
+const search = async (term) => {
+  BlogPost.findAll();
+};
+
+module.exports = { add, getAll, getById, update, remove, search };
