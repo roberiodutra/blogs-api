@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const { BlogPost, PostCategory, Category, User } = require('../database/models');
 const { errorMessages: err } = require('../helpers');
 const { postVal } = require('../schemas');
@@ -111,7 +112,31 @@ const remove = async (req) => {
 };
 
 const search = async (term) => {
-  BlogPost.findAll();
+  const data = await BlogPost.findAll({
+    where: {
+      [Op.or]: [
+        {
+          title: { [Op.substring]: term },
+        },
+        {
+          content: { [Op.substring]: term },
+        },
+      ],
+    },
+    include: [
+      {
+        model: User,
+        as: 'user',
+        attributes: { exclude: 'password' },
+      },
+      {
+        model: Category,
+        as: 'categories',
+        attributes: ['id', 'name'],
+      }],
+  });
+
+  return data;
 };
 
 module.exports = { add, getAll, getById, update, remove, search };
