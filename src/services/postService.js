@@ -115,25 +115,19 @@ const search = async (term) => {
   const data = await BlogPost.findAll({
     where: {
       [Op.or]: [
-        {
-          title: { [Op.substring]: term },
-        },
-        {
-          content: { [Op.substring]: term },
-        },
+        { title: { [Op.substring]: term } },
+        { content: { [Op.substring]: term } },
       ],
     },
-    include: [
-      {
-        model: User,
-        as: 'user',
-        attributes: { exclude: 'password' },
-      },
-      {
-        model: Category,
-        as: 'categories',
-        attributes: ['id', 'name'],
-      }],
+    include: [{
+      model: User,
+      as: 'user',
+      attributes: { exclude: 'password' },
+    }, {
+      model: Category,
+      as: 'categories',
+      attributes: ['id', 'name'],
+    }],
   });
 
   return data;
