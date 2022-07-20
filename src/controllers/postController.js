@@ -7,6 +7,7 @@ const add = async (req, res) => {
     await validateTokenService.validate(req);
 
     const data = await postService.add(req);
+
     return res.status(httpStatus.CREATED).json(data);
   } catch (e) {
     res.status(e.message.slice(-3))
@@ -19,6 +20,7 @@ const getAll = async (req, res) => {
     await validateTokenService.validate(req);
 
     const data = await postService.getAll();
+
     return res.status(httpStatus.OK).json(data);
   } catch (e) {
     res.status(e.message.slice(-3))

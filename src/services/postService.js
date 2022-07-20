@@ -73,6 +73,8 @@ const getById = async (id) => {
 const update = async (req) => {
   const { id: postId } = req.params;
 
+  await postVal.validateAsync(req.body);
+
   const checkUser = await BlogPost.findAll({
     where: {
       id: postId,
