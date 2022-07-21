@@ -1,6 +1,6 @@
 const { User } = require('../database/models');
 const { generateToken, errorMessages: err } = require('../helpers');
-const { userVal, checkUser } = require('../schemas');
+const { userVal, checkEmail, checkUser } = require('../schemas');
 
 const create = async (body) => {
   await userVal.validateAsync(body);
@@ -10,7 +10,7 @@ const create = async (body) => {
     where: { email },
   });
 
-  await checkUser.validateAsync(!userExists);
+  await checkEmail.validateAsync(!userExists);
 
   await User.create(body);
 
@@ -31,7 +31,7 @@ const getById = async (id) => {
     attributes: { exclude: 'password' },
   });
 
-  if (!user) throw new Error(err.USER_N_FOUND);
+  await checkUser.validateAsync(!user);
 
   return user;
 };

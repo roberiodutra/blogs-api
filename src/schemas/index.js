@@ -41,12 +41,20 @@ module.exports = {
       err.NAME_REQUIRED,
   )),
 
-  checkUser: Joi.boolean()
+  checkEmail: Joi.boolean()
     .invalid(false)
     .error((errors) => eConfig(
       errors,
       httpStatus.CONFLICT,
       err.USER_A_REG,
+  )),
+
+  checkUser: Joi.boolean()
+    .invalid(true)
+    .error((errors) => eConfig(
+      errors,
+      httpStatus.NOT_FOUND,
+      err.USER_N_FOUND,
   )),
 
   userVal: Joi.object({
