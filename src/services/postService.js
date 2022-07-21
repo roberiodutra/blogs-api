@@ -3,6 +3,12 @@ const { BlogPost, PostCategory, Category, User } = require('../database/models')
 const { httpStatus, errorMessages: err } = require('../helpers');
 const { bodyVal } = require('../schemas');
 
+const throwNewError = (message, status) => {
+  const error = new Error(message);
+  error.details = [{ type: status }];
+  throw error;
+};
+
 const add = async (req) => {
   await bodyVal.validateAsync(req.body);
 
@@ -15,9 +21,7 @@ const add = async (req) => {
   });
 
   if (catIdExists.length === 0) {
-    const error = new Error(err.CAT_N_FOUND);
-    error.details = [{ type: httpStatus.BAD_REQUEST }];
-    throw error;
+    throwNewError(err.CAT_N_FOUND, httpStatus.BAD_REQUEST);
   }
 
   await Promise.all([
@@ -53,23 +57,19 @@ const getById = async (id) => {
   });
 
   if (postExists.length === 0) {
-    const error = new Error(err.POST_N_FOUND);
-    error.details = [{ type: httpStatus.NOT_FOUND }];
-    throw error;
+    throwNewError(err.POST_N_FOUND, httpStatus.NOT_FOUND);
   }
 
   const post = await BlogPost.findByPk(id, {
-    include: [
-      {
-        model: User,
-        as: 'user',
-        attributes: { exclude: 'password' },
-      },
-      {
-        model: Category,
-        as: 'categories',
-        attributes: ['id', 'name'],
-      }],
+    include: [{
+      model: User,
+      as: 'user',
+      attributes: { exclude: 'password' },
+    }, {
+      model: Category,
+      as: 'categories',
+      attributes: ['id', 'name'],
+    }],
   });
 
   return post;
@@ -87,7 +87,9 @@ const update = async (req) => {
     },
   });
 
-  if (checkUser.length === 0) throw new Error(err.UNAUTHORIZED);
+  if (checkUser.length === 0) {
+    throwNewError(err.UNAUTHORIZED, httpStatus.UNAUTHORIZED);
+  }
 
   await BlogPost.update(req.body,
     { where: { id: postId },
@@ -110,7 +112,9 @@ const remove = async (req) => {
     },
   });
 
-  if (checkUser.length === 0) throw new Error(err.UNAUTHORIZED);
+  if (checkUser.length === 0) {
+    throwNewError(err.UNAUTHORIZED, httpStatus.UNAUTHORIZED);
+  }
 
   await BlogPost.destroy({ where: { id: postId } });
 };

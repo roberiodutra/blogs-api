@@ -82,11 +82,11 @@ module.exports = {
         httpStatus.BAD_REQUEST,
         err.INVALID_PASS,
       )),
-    image: Joi.string()
+    image: Joi.any()
       .error((errors) => eConfig(
         errors,
-        httpStatus.BAD_REQUEST,
         err.FIELDS_REQ,
+        httpStatus.BAD_REQUEST,
       )),
   }).required(),
 

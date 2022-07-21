@@ -1,5 +1,5 @@
 const { User } = require('../database/models');
-const { generateToken, errorMessages: err } = require('../helpers');
+const { generateToken } = require('../helpers');
 const { userVal, checkEmail, checkUser } = require('../schemas');
 
 const create = async (body) => {
