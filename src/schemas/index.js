@@ -10,7 +10,7 @@ const eConfig = (errors, status, message) => {
 };
 
 module.exports = {
-  loginVal: Joi.object({
+  bodyVal: Joi.object({
     email: Joi.string(),
     password: Joi.string(),
     title: Joi.string(),
@@ -41,34 +41,46 @@ module.exports = {
       err.NAME_REQUIRED,
   )),
 
+  checkUser: Joi.boolean()
+    .invalid(false)
+    .error((errors) => eConfig(
+      errors,
+      httpStatus.CONFLICT,
+      err.USER_A_REG,
+  )),
+
   userVal: Joi.object({
     displayName: Joi.string()
-      .required()
       .min(8)
-      .messages({
-        'string.min': err.INVALID_NAME,
-      }),
+      .error((errors) => eConfig(
+        errors,
+        httpStatus.BAD_REQUEST,
+        err.INVALID_NAME,
+      )),
     email: Joi.string()
-      .required()
       .email({
         minDomainSegments: 2,
         tlds: { allow: ['com', 'net'] },
       })
-      .messages({
-        'string.email': err.INVALID_EMAIL,
-      }),
+      .error((errors) => eConfig(
+        errors,
+        httpStatus.BAD_REQUEST,
+        err.INVALID_EMAIL,
+      )),
     password: Joi.string()
-      .required()
       .min(6)
-      .messages({
-        'string.min': err.INVALID_PASS,
-      }),
+      .error((errors) => eConfig(
+        errors,
+        httpStatus.BAD_REQUEST,
+        err.INVALID_PASS,
+      )),
     image: Joi.string()
-      .required()
-      .messages({
-        'any.required': err.FIELDS_REQ,
-      }),
-  }),
+      .error((errors) => eConfig(
+        errors,
+        httpStatus.BAD_REQUEST,
+        err.FIELDS_REQ,
+      )),
+  }).required(),
 
   tokenVal: Joi.object({
     token: Joi.string()

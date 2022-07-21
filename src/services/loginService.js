@@ -1,9 +1,9 @@
 const { User } = require('../database/models');
 const { generateToken } = require('../helpers');
-const { loginVal, checkBool } = require('../schemas');
+const { bodyVal, checkBool } = require('../schemas');
 
 const login = async (body) => {
-  await loginVal.validateAsync(body);
+  await bodyVal.validateAsync(body);
 
   const userExists = await User.findOne({
     attributes: ['id', 'displayName', 'email', 'image'],

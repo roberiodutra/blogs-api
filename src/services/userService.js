@@ -1,6 +1,6 @@
 const { User } = require('../database/models');
 const { generateToken, errorMessages: err } = require('../helpers');
-const { userVal } = require('../schemas');
+const { userVal, checkUser } = require('../schemas');
 
 const create = async (body) => {
   await userVal.validateAsync(body);
@@ -10,7 +10,7 @@ const create = async (body) => {
     where: { email },
   });
 
-  if (userExists) throw new Error(err.USER_A_REG);
+  await checkUser.validateAsync(!userExists);
 
   await User.create(body);
 

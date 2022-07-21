@@ -1,10 +1,10 @@
 const { Op } = require('sequelize');
 const { BlogPost, PostCategory, Category, User } = require('../database/models');
 const { httpStatus, errorMessages: err } = require('../helpers');
-const { loginVal } = require('../schemas');
+const { bodyVal } = require('../schemas');
 
 const add = async (req) => {
-  await loginVal.validateAsync(req.body);
+  await bodyVal.validateAsync(req.body);
 
   const { title, content, categoryIds } = req.body;
   const { id: userId } = req.user;
@@ -74,7 +74,7 @@ const getById = async (id) => {
 const update = async (req) => {
   const { id: postId } = req.params;
 
-  await loginVal.validateAsync(req.body);
+  await bodyVal.validateAsync(req.body);
 
   const checkUser = await BlogPost.findAll({
     where: {
