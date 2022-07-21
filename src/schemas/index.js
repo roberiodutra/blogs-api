@@ -35,7 +35,7 @@ module.exports = {
       errors,
       httpStatus.BAD_REQUEST,
       err.NAME_REQUIRED,
-)),
+  )),
 
   userVal: Joi.object({
     displayName: Joi.string()
@@ -69,9 +69,11 @@ module.exports = {
   tokenVal: Joi.object({
     token: Joi.string()
       .required()
-      .messages({
-        'string.empty': err.TOKEN_N_FOUND,
-      }),
+      .error((errors) => eConfig(
+        errors,
+        httpStatus.UNAUTHORIZED,
+        err.TOKEN_N_FOUND,
+      )),
   }),
 
   postVal: Joi.object({
