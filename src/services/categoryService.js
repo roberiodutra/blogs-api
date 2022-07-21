@@ -1,8 +1,8 @@
 const { Category } = require('../database/models');
-const { errorMessages: err } = require('../helpers');
+const { checkName } = require('../schemas');
 
 const add = async ({ name }) => {
-  if (!name) throw new Error(err.NAME_REQUIRED);
+  await checkName.validateAsync(!name)
 
   const { dataValues } = await Category.create({ name });
 

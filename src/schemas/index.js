@@ -29,6 +29,14 @@ module.exports = {
       err.INVALID_FIELDS,
   )),
 
+  checkName: Joi.boolean()
+    .invalid(true)
+    .error((errors) => eConfig(
+      errors,
+      httpStatus.BAD_REQUEST,
+      err.NAME_REQUIRED,
+)),
+
   userVal: Joi.object({
     displayName: Joi.string()
       .required()
