@@ -52,7 +52,11 @@ const getById = async (id) => {
     where: { id },
   });
 
-  if (postExists.length === 0) throw new Error(err.POST_N_FOUND);
+  if (postExists.length === 0) {
+    const error = new Error(err.POST_N_FOUND);
+    error.details = [{ type: httpStatus.NOT_FOUND }];
+    throw error;
+  }
 
   const post = await BlogPost.findByPk(id, {
     include: [
