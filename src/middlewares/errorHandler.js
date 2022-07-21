@@ -1,4 +1,8 @@
 module.exports = (err, _req, res, _next) => {
-  return res.status(err.message.slice(-3))
-    .json({ message: err.message.slice(0, -13) });
-}
+  res.status(
+    err.details[0].type,
+  )
+    .json({
+      message: err.message,
+    });
+};

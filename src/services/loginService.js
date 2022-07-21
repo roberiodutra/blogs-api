@@ -1,6 +1,6 @@
 const { User } = require('../database/models');
 const { generateToken, errorMessages: err } = require('../helpers');
-const { loginVal } = require('../schemas');
+const { loginVal, checkBool } = require('../schemas');
 
 const login = async (body) => {
   await loginVal.validateAsync(body);
@@ -10,7 +10,7 @@ const login = async (body) => {
     where: body,
   });
 
-  if (!userExists) throw new Error(err.INVALID_FIELDS);
+  await checkBool.validateAsync(!userExists);
 
   const token = generateToken(userExists.dataValues);
   return { token };

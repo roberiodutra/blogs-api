@@ -1,19 +1,33 @@
 const Joi = require('joi');
-const { errorMessages: err } = require('../helpers');
+const { httpStatus, errorMessages: err } = require('../helpers');
+
+const eConfig = (errors, status, message) => {
+  errors.forEach((e) => { 
+    e.code = status;
+    e.message = message;
+  });
+  return errors;
+}
 
 module.exports = {
   loginVal: Joi.object({
-    email: Joi.string()
-      .required()
-      .messages({
-        'string.empty': err.FIELDS_REQ,
-      }),
-    password: Joi.string()
-      .required()
-      .messages({
-        'string.empty': err.FIELDS_REQ,
-      }),
-  }),
+    email: Joi.string(),
+    password: Joi.string(),
+  })
+  .required()
+  .error((errors) => eConfig(
+    errors,
+    httpStatus.BAD_REQUEST,
+    err.FIELDS_REQ,
+  )),
+
+  checkBool: Joi.boolean()
+    .invalid(true)
+    .error((errors) => eConfig(
+      errors,
+      httpStatus.BAD_REQUEST,
+      err.INVALID_FIELDS,
+  )),
 
   userVal: Joi.object({
     displayName: Joi.string()
