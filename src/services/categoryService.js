@@ -2,7 +2,7 @@ const { Category } = require('../database/models');
 const { checkName } = require('../schemas');
 
 const add = async ({ name }) => {
-  await checkName.validateAsync(!name)
+  await checkName.validateAsync(!name);
 
   const { dataValues } = await Category.create({ name });
 

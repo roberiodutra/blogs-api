@@ -10,9 +10,9 @@ const validate = async (req) => {
   await tokenVal.validateAsync({ token });
   jwt.verify(token, SECRET, (error, user) => {
     if (error) {
-      error.message = err.INVALID_TOKEN;
-      error.details = [{ type: httpStatus.UNAUTHORIZED }];
-      throw error;
+      const newError = new Error(err.INVALID_TOKEN);
+      newError.details = [{ type: httpStatus.UNAUTHORIZED }];
+      throw newError;
     }
     req.user = user;
   });

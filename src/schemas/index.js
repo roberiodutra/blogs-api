@@ -7,12 +7,16 @@ const eConfig = (errors, status, message) => {
     e.message = message;
   });
   return errors;
-}
+};
 
 module.exports = {
   loginVal: Joi.object({
     email: Joi.string(),
     password: Joi.string(),
+    title: Joi.string(),
+    content: Joi.string(),
+    categoryIds: Joi.array()
+      .items(Joi.number()),
   })
   .required()
   .error((errors) => eConfig(
@@ -74,24 +78,5 @@ module.exports = {
         httpStatus.UNAUTHORIZED,
         err.TOKEN_N_FOUND,
       )),
-  }),
-
-  postVal: Joi.object({
-    title: Joi.string()
-      .required()
-      .messages({
-        'string.empty': err.FIELDS_REQ,
-      }),
-    content: Joi.string()
-      .required()
-      .messages({
-        'string.empty': err.FIELDS_REQ,
-      }),
-    categoryIds: Joi.array()
-      .items(Joi.number()
-        .required()
-        .messages({
-          'any.required': err.FIELDS_REQ,
-        })),
   }),
 };

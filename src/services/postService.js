@@ -1,28 +1,28 @@
 const { Op } = require('sequelize');
 const { BlogPost, PostCategory, Category, User } = require('../database/models');
-const { errorMessages: err } = require('../helpers');
-const { postVal } = require('../schemas');
+const { httpStatus, errorMessages: err } = require('../helpers');
+const { loginVal } = require('../schemas');
 
 const add = async (req) => {
-  await postVal.validateAsync(req.body);
+  await loginVal.validateAsync(req.body);
 
   const { title, content, categoryIds } = req.body;
   const { id: userId } = req.user;
-  const { dataValues } = await BlogPost.create(
-    { userId, title, content },
-  );
+  const { dataValues } = await BlogPost.create({ userId, title, content });
 
   const catIdExists = await Category.findAll({
     where: { id: categoryIds },
   });
 
-  if (catIdExists.length === 0) throw new Error(err.CAT_N_FOUND);
+  if (catIdExists.length === 0) {
+    const error = new Error(err.CAT_N_FOUND);
+    error.details = [{ type: httpStatus.BAD_REQUEST }];
+    throw error;
+  }
 
   await Promise.all([
     categoryIds.map((categoryId) => (
-      PostCategory.create({
-        postId: dataValues.id, categoryId,
-      })
+      PostCategory.create({ postId: dataValues.id, categoryId })
     )),
   ]);
 
@@ -74,7 +74,7 @@ const getById = async (id) => {
 const update = async (req) => {
   const { id: postId } = req.params;
 
-  await postVal.validateAsync(req.body);
+  await loginVal.validateAsync(req.body);
 
   const checkUser = await BlogPost.findAll({
     where: {
